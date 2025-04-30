@@ -1,4 +1,4 @@
-package id.uver.school;
+package id.uver.school.service;
 
 /*
  * Copyright 2025 Juned Juna
@@ -16,14 +16,5 @@ package id.uver.school;
  * limitations under the License.
  */
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class FreeSisApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(FreeSisApplication.class, args);
-    }
-
+public interface ClassService {
 }

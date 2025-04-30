@@ -15,16 +15,23 @@
     <description>demo</description>
     <url/>
     <licenses>
-        <license/>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
     </licenses>
     <developers>
-        <developer/>
+        <developer>
+            <id>junaJuned</id>
+            <name>Arjuna Candra Pawitra</name>
+            <email>arjunacandra342@gmail.com</email>
+        </developer>
     </developers>
     <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
+        <connection>scm:git:https://github.com/junedJuna/FreeAis.git</connection>
+        <developerConnection>scm:git:git@github.com:junedJuna/FreeAis.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/junedJuna/FreeAis</url>
     </scm>
     <properties>
         <java.version>17</java.version>

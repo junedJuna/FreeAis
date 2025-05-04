@@ -24,8 +24,8 @@ import java.util.UUID;
  * limitations under the License.
  */
 public interface ClassService {
-    public ResponseCommonEntity<List<ClassResponse>> getAll();
-    public ResponseCommonEntity<ClassResponse> save(ClassRequest request) throws DataNotFoundException;
-    public ResponseCommonEntity<ClassResponse> getClassDetail(UUID id) throws DataNotFoundException;
-    public ResponseCommonEntity<ClassResponse> delete(UUID id) throws DataNotFoundException;
+    ResponseCommonEntity<List<ClassResponse>> getAll();
+    ResponseCommonEntity<ClassResponse> save(ClassRequest request) throws DataNotFoundException;
+    ResponseCommonEntity<ClassResponse> getClassDetail(UUID id) throws DataNotFoundException;
+    ResponseCommonEntity<ClassResponse> delete(UUID id) throws DataNotFoundException;
 }

@@ -1,3 +1,17 @@
 spring:
   application:
-    name: demo
+    name: free-sis
+  datasource:
+    username: ${DB_USER:uver}
+    password: ${DB_PASSWORD:Uver123}
+    url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORt:uver}5431/${DB_NAME:freesis}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: ${SERVER_PORT:8080}
+springdoc:
+  api-docs:
+    path: /api-docs

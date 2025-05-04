@@ -1,4 +1,7 @@
-package id.uver.school;
+package id.uver.freesis.base_package.dto;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /*
  * Copyright 2025 Juned Juna
@@ -15,15 +18,10 @@ package id.uver.school;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class FreeSisApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(FreeSisApplication.class, args);
-    }
-
+@Getter
+@Setter
+public class CommonResponse<T> {
+    private String respCode;
+    private String respMessage;
+    private T data;
 }

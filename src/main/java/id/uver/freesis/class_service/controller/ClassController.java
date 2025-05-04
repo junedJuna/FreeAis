@@ -16,7 +16,8 @@ package id.uver.freesis.class_service.controller;
  * limitations under the License.
  */
 
-import id.uver.freesis.base_package.dto.BaseResponse;
+import id.uver.freesis.base_package.dto.ResponseCommonEntity;
+import id.uver.freesis.base_package.exception.DataNotFoundException;
 import id.uver.freesis.class_service.dto.request.ClassRequest;
 import id.uver.freesis.class_service.dto.response.ClassResponse;
 import id.uver.freesis.class_service.service.ClassService;
@@ -34,21 +35,21 @@ public class ClassController {
     private final ClassService classService;
 
     @GetMapping("/get")
-    public BaseResponse<List<ClassResponse>> getClassList(ClassRequest request) {
+    public ResponseCommonEntity<List<ClassResponse>> getClassList(ClassRequest request) {
         return classService.getAll();
     }
     @PostMapping("/save")
-    public BaseResponse<ClassResponse> saveClass(@RequestBody ClassRequest request){
+    public ResponseCommonEntity<ClassResponse> saveClass(@RequestBody ClassRequest request) throws DataNotFoundException {
         return classService.save(request);
     }
 
     @GetMapping("/get/{id}")
-    public BaseResponse<ClassResponse> getClassById(@PathVariable("id") String id){
+    public ResponseCommonEntity<ClassResponse> getClassById(@PathVariable("id") String id) throws DataNotFoundException {
         return classService.getClassDetail(UUID.fromString(id));
     }
 
     @DeleteMapping("/delete/{id}")
-    public BaseResponse<ClassResponse> deleteClass(@PathVariable("id") String id){
+    public ResponseCommonEntity<ClassResponse> deleteClass(@PathVariable("id") String id) throws DataNotFoundException {
         return classService.delete(UUID.fromString(id));
     }
 }

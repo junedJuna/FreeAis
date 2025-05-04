@@ -1,6 +1,7 @@
 package id.uver.freesis.class_service.service;
 
-import id.uver.freesis.base_package.dto.BaseResponse;
+import id.uver.freesis.base_package.dto.ResponseCommonEntity;
+import id.uver.freesis.base_package.exception.DataNotFoundException;
 import id.uver.freesis.class_service.dto.request.ClassRequest;
 import id.uver.freesis.class_service.dto.response.ClassResponse;
 
@@ -23,8 +24,8 @@ import java.util.UUID;
  * limitations under the License.
  */
 public interface ClassService {
-    public BaseResponse<List<ClassResponse>> getAll();
-    public BaseResponse<ClassResponse> save(ClassRequest request);
-    public BaseResponse<ClassResponse> getClassDetail(UUID id);
-    public BaseResponse<ClassResponse> delete(UUID id);
+    public ResponseCommonEntity<List<ClassResponse>> getAll();
+    public ResponseCommonEntity<ClassResponse> save(ClassRequest request) throws DataNotFoundException;
+    public ResponseCommonEntity<ClassResponse> getClassDetail(UUID id) throws DataNotFoundException;
+    public ResponseCommonEntity<ClassResponse> delete(UUID id) throws DataNotFoundException;
 }

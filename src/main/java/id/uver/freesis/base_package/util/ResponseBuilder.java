@@ -1,7 +1,7 @@
 package id.uver.freesis.base_package.util;
 
 import id.uver.freesis.base_package.constant.ResponseEnum;
-import id.uver.freesis.base_package.dto.BaseResponse;
+import id.uver.freesis.base_package.dto.ResponseCommonEntity;
 
 /*
  * Copyright 2025 Juned Juna
@@ -23,16 +23,16 @@ import id.uver.freesis.base_package.dto.BaseResponse;
 public class ResponseBuilder {
     private ResponseBuilder(){}
 
-    public static <T> BaseResponse<T> buildResponse(String code, String msg, T data) {
-        BaseResponse<T> response = new BaseResponse<>();
+    public static <T> ResponseCommonEntity<T> buildResponse(String code, String msg, T data) {
+        ResponseCommonEntity<T> response = new ResponseCommonEntity<>();
         response.setRespCode(code);
         response.setRespMessage(msg);
         response.setData(data);
         return response;
     }
 
-    public static <T> BaseResponse<T> buildResponse(ResponseEnum responseEnum, String serviceCode, T data) {
-        BaseResponse<T> response = new BaseResponse<>();
+    public static <T> ResponseCommonEntity<T> buildResponse(ResponseEnum responseEnum, String serviceCode, T data) {
+        ResponseCommonEntity<T> response = new ResponseCommonEntity<>();
         response.setRespCode(responseEnum.getHttpCode()+serviceCode+responseEnum.getRespCode());
         response.setRespMessage(responseEnum.getRespMessage());
         response.setData(data);

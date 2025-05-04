@@ -1,7 +1,8 @@
 package id.uver.freesis.class_service.service.impl;
 
 import id.uver.freesis.base_package.constant.ResponseEnum;
-import id.uver.freesis.base_package.dto.BaseResponse;
+import id.uver.freesis.base_package.dto.ResponseCommonEntity;
+import id.uver.freesis.base_package.exception.DataNotFoundException;
 import id.uver.freesis.base_package.util.ResponseBuilder;
 import id.uver.freesis.class_service.dto.request.ClassRequest;
 import id.uver.freesis.class_service.dto.response.ClassResponse;
@@ -34,24 +35,25 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ClassServiceImpl implements ClassService {
+    public static final String CLASS_NOT_FOUND = "Class not found";
     private String serviceCode = "10";
 
     private final ClassRepository classRepository;
 
-    public BaseResponse<List<ClassResponse>> getAll() {
+    public ResponseCommonEntity<List<ClassResponse>> getAll() {
         List<MstClass> classList = classRepository.findAll();
         return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDtoList(classList));
     }
 
-    public BaseResponse<ClassResponse> getClassDetail(UUID id) {
-        MstClass mstClass = classRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Class not found"));
+    public ResponseCommonEntity<ClassResponse> getClassDetail(UUID id) throws DataNotFoundException {
+        MstClass mstClass = classRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CLASS_NOT_FOUND));
         return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDto(mstClass));
     }
 
-    public BaseResponse<ClassResponse> save(ClassRequest request) {
+    public ResponseCommonEntity<ClassResponse> save(ClassRequest request) throws DataNotFoundException {
         MstClass mstClass;
         if (request.getId() != null) {
-            mstClass = classRepository.findById(UUID.fromString(request.getId())).orElseThrow(() -> new IllegalArgumentException("Class not found"));
+            mstClass = classRepository.findById(UUID.fromString(request.getId())).orElseThrow(() -> new DataNotFoundException(CLASS_NOT_FOUND));
         } else {
             mstClass = new MstClass();
         }
@@ -63,8 +65,8 @@ public class ClassServiceImpl implements ClassService {
         return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDto(mstClass));
     }
 
-    public BaseResponse<ClassResponse> delete(UUID id) {
-        MstClass mstClass = classRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Class not found"));
+    public ResponseCommonEntity<ClassResponse> delete(UUID id) throws DataNotFoundException {
+        MstClass mstClass = classRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CLASS_NOT_FOUND));
         mstClass.setDeletedBy("SYSTEM");
         mstClass.setDeletedDate(LocalDateTime.now());
         classRepository.save(mstClass);

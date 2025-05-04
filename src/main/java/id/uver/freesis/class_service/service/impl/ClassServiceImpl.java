@@ -1,6 +1,8 @@
 package id.uver.freesis.class_service.service.impl;
 
-import id.uver.freesis.base_package.dto.CommonResponse;
+import id.uver.freesis.base_package.constant.ResponseEnum;
+import id.uver.freesis.base_package.dto.BaseResponse;
+import id.uver.freesis.base_package.util.ResponseBuilder;
 import id.uver.freesis.class_service.dto.request.ClassRequest;
 import id.uver.freesis.class_service.dto.response.ClassResponse;
 import id.uver.freesis.class_service.entity.MstClass;
@@ -32,28 +34,21 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ClassServiceImpl implements ClassService {
+    private String serviceCode = "10";
 
     private final ClassRepository classRepository;
 
-    public CommonResponse<List<ClassResponse>> getAll() {
+    public BaseResponse<List<ClassResponse>> getAll() {
         List<MstClass> classList = classRepository.findAll();
-        CommonResponse<List<ClassResponse>> response = new CommonResponse<>();
-        response.setRespCode("2001000");
-        response.setRespMessage("Success");
-        response.setData(mapToDtoList(classList));
-        return response;
+        return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDtoList(classList));
     }
 
-    public CommonResponse<ClassResponse> getClassDetail(UUID id) {
+    public BaseResponse<ClassResponse> getClassDetail(UUID id) {
         MstClass mstClass = classRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Class not found"));
-        CommonResponse<ClassResponse> response = new CommonResponse<>();
-        response.setRespCode("2001000");
-        response.setRespMessage("Success");
-        response.setData(mapToDto(mstClass));
-        return response;
+        return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDto(mstClass));
     }
 
-    public CommonResponse<ClassResponse> save(ClassRequest request) {
+    public BaseResponse<ClassResponse> save(ClassRequest request) {
         MstClass mstClass;
         if (request.getId() != null) {
             mstClass = classRepository.findById(UUID.fromString(request.getId())).orElseThrow(() -> new IllegalArgumentException("Class not found"));
@@ -65,24 +60,16 @@ public class ClassServiceImpl implements ClassService {
         mstClass.setClassDescription(request.getClassDescription());
         classRepository.save(mstClass);
 
-        CommonResponse<ClassResponse> response = new CommonResponse<>();
-        response.setRespCode("2001000");
-        response.setRespMessage("Success");
-        response.setData(mapToDto(mstClass));
-        return response;
+        return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDto(mstClass));
     }
 
-    public CommonResponse<ClassResponse> delete(UUID id) {
+    public BaseResponse<ClassResponse> delete(UUID id) {
         MstClass mstClass = classRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Class not found"));
         mstClass.setDeletedBy("SYSTEM");
         mstClass.setDeletedDate(LocalDateTime.now());
         classRepository.save(mstClass);
 
-        CommonResponse<ClassResponse> response = new CommonResponse<>();
-        response.setRespCode("2001000");
-        response.setRespMessage("Success");
-        response.setData(mapToDto(mstClass));
-        return response;
+        return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDto(mstClass));
     }
 
     private List<ClassResponse> mapToDtoList(List<MstClass> classList) {

@@ -4,8 +4,11 @@ spring:
   datasource:
     username: ${DB_USER:uver}
     password: ${DB_PASSWORD:Uver123}
-    url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORt:uver}5431/${DB_NAME:freesis}
-    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORt:5431}/${DB_NAME:freesis}
+    hikari:
+      max-lifetime: 10
+      maximum-pool-size: 50
+      driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update

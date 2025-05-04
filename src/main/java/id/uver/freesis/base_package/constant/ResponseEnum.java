@@ -1,11 +1,6 @@
-package id.uver.freesis.class_service.service;
+package id.uver.freesis.base_package.constant;
 
-import id.uver.freesis.base_package.dto.BaseResponse;
-import id.uver.freesis.class_service.dto.request.ClassRequest;
-import id.uver.freesis.class_service.dto.response.ClassResponse;
-
-import java.util.List;
-import java.util.UUID;
+import lombok.Getter;
 
 /*
  * Copyright 2025 Juned Juna
@@ -22,9 +17,21 @@ import java.util.UUID;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public interface ClassService {
-    public BaseResponse<List<ClassResponse>> getAll();
-    public BaseResponse<ClassResponse> save(ClassRequest request);
-    public BaseResponse<ClassResponse> getClassDetail(UUID id);
-    public BaseResponse<ClassResponse> delete(UUID id);
+public enum ResponseEnum {
+
+    SUCCESS("200", "00", "Success");
+
+    @Getter
+    private final String httpCode;
+    @Getter
+    private final String respCode;
+    @Getter
+    private final String respMessage;
+
+    ResponseEnum(String httpCode, String respCode, String respMessage) {
+        this.httpCode = httpCode;
+        this.respCode = respCode;
+        this.respMessage = respMessage;
+    }
+
 }

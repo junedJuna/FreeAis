@@ -20,7 +20,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CommonResponse<T> {
+public class BaseResponse<T> {
     private String respCode;
     private String respMessage;
     private T data;

@@ -16,7 +16,7 @@ package id.uver.freesis.class_service.controller;
  * limitations under the License.
  */
 
-import id.uver.freesis.base_package.dto.CommonResponse;
+import id.uver.freesis.base_package.dto.BaseResponse;
 import id.uver.freesis.class_service.dto.request.ClassRequest;
 import id.uver.freesis.class_service.dto.response.ClassResponse;
 import id.uver.freesis.class_service.service.ClassService;
@@ -34,21 +34,21 @@ public class ClassController {
     private final ClassService classService;
 
     @GetMapping("/get")
-    public CommonResponse<List<ClassResponse>> getClassList(ClassRequest request) {
+    public BaseResponse<List<ClassResponse>> getClassList(ClassRequest request) {
         return classService.getAll();
     }
     @PostMapping("/save")
-    public CommonResponse<ClassResponse> saveClass(@RequestBody ClassRequest request){
+    public BaseResponse<ClassResponse> saveClass(@RequestBody ClassRequest request){
         return classService.save(request);
     }
 
     @GetMapping("/get/{id}")
-    public CommonResponse<ClassResponse> getClassById(@PathVariable("id") String id){
+    public BaseResponse<ClassResponse> getClassById(@PathVariable("id") String id){
         return classService.getClassDetail(UUID.fromString(id));
     }
 
     @DeleteMapping("/delete/{id}")
-    public CommonResponse<ClassResponse> deleteClass(@PathVariable("id") String id){
+    public BaseResponse<ClassResponse> deleteClass(@PathVariable("id") String id){
         return classService.delete(UUID.fromString(id));
     }
 }

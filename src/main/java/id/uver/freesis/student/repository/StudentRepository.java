@@ -1,10 +1,10 @@
-package id.uver.freesis.class_service.repository;
+package id.uver.freesis.student.repository;
 
-import id.uver.freesis.class_service.entity.MstClass;
+import id.uver.freesis.student.entity.MstStudent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /*
@@ -23,6 +23,6 @@ import java.util.UUID;
  * limitations under the License.
  */
 @Repository
-public interface ClassRepository extends JpaRepository<MstClass, UUID> {
-    List<MstClass> findAllByDeletedByIsNull();
+public interface StudentRepository extends JpaRepository<MstStudent, UUID> {
+    Optional<MstStudent> findOneByStudentId(String studentId);
 }

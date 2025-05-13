@@ -1,11 +1,9 @@
-package id.uver.freesis.class_service.repository;
+package id.uver.freesis.student.dto.response;
 
-import id.uver.freesis.class_service.entity.MstClass;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 /*
  * Copyright 2025 Juned Juna
@@ -22,7 +20,22 @@ import java.util.UUID;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Repository
-public interface ClassRepository extends JpaRepository<MstClass, UUID> {
-    List<MstClass> findAllByDeletedByIsNull();
+@Getter
+@Setter
+public class StudentResponse {
+    private String studentId;
+    private String firstName;
+    private String lastName;
+    private Integer year;
+    private String gender;
+    private String email;
+    private String phone;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
+    private String country;
+    private LocalDateTime dateOfBirth;
+    private String placeOfBirth;
+    private String nationality;
 }

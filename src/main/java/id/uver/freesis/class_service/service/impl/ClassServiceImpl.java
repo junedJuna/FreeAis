@@ -41,7 +41,7 @@ public class ClassServiceImpl implements ClassService {
     private final ClassRepository classRepository;
 
     public ResponseCommonEntity<List<ClassResponse>> getAll() {
-        List<MstClass> classList = classRepository.findAll();
+        List<MstClass> classList = classRepository.findAllByDeletedByIsNull();
         return ResponseBuilder.buildResponse(ResponseEnum.SUCCESS, serviceCode, mapToDtoList(classList));
     }
 
